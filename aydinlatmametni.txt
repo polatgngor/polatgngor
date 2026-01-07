@@ -1,0 +1,87 @@
+TAKSİBU KULLANIM KOŞULLARI
+
+Yürürlük Tarihi: 29.12.2025 — Sürüm: v1.0
+
+İşbu Kullanım Koşulları (“Koşullar”); Taksibu uygulamalarını kullanan yolcular (“Yolcu/Müşteri”) ile sürücüler (“Sürücü”) açısından Platformun kullanım kurallarını, hizmet kapsamını, sorumluluk sınırlarını ve tarafların yükümlülüklerini düzenler.
+
+Taksibu uygulamasını indirerek/hesap oluşturarak veya kullanarak bu Koşulları kabul etmiş sayılırsınız.
+
+1. Hizmetin Kapsamı ve Tarafların Konumu
+
+1.1 Taksibu, yolcu ile ticari taksi sürücülerini konum bazlı şekilde buluşturan bir teknoloji platformudur.
+1.2 Taksibu taşıma hizmeti sunmaz; yolculuğun tarafı değildir.
+1.3 Yolculuk, yolcu ile sürücü arasında gerçekleşir; taşıma ile ilgili asli sorumluluk taraflara aittir.
+1.4 Platform, “sokaktan taksi çevirme” mantığına benzer şekilde, tarafların birbirini daha hızlı bulması için dijital kolaylık sağlar.
+
+2. Üyelik, Hesap ve Doğrulama
+
+2.1 Uygulamaya giriş, telefon numarası doğrulaması (OTP) ile yapılır.
+2.2 Kullanıcı, sağladığı bilgilerin doğru ve güncel olduğunu kabul eder.
+2.3 Güvenlik nedeniyle bazı bilgiler (ör. telefon numarası) belirli kurallara tabidir; gerektiğinde yeni hesap açılması gerekebilir.
+2.4 Kullanıcı, hesabının güvenliğinden (cihaz erişimi, SMS, bildirimler vb.) kendisi sorumludur.
+
+3. Yolcu İçin Kullanım Akışı
+
+3.1 Yolcu; konumunu belirleyerek, araç tipini seçerek ve varsa ek tercihleri işaretleyerek talep oluşturur.
+3.2 Talep, uygun sürücülere iletilir; sürücü kabul ederse eşleşme oluşur ve sürücü bilgileri yolcuya gösterilir.
+3.3 Yolcu, eşleşme öncesi/sonrası belirli aşamalarda talebini iptal edebilir. (v1.0’da iptal ücreti uygulanmıyorsa bu ayrıca belirtilir.)
+3.4 Tahmini süre/mesafe/ücret gibi bilgiler tahminidir; şebeke, trafik, GPS ve güzergâh farklılıkları nedeniyle değişebilir.
+
+4. Sürücü İçin Kullanım Akışı
+
+4.1 Sürücü; online/offline durumunu yönetir, gelen talepleri belirli süre içinde kabul/ret edebilir.
+4.2 “Tek plaka – tek online oturum” kuralı uygulanabilir: Aynı plakayla ikinci giriş olması halinde sistem güvenlik nedeniyle önceki oturumu sonlandırabilir.
+4.3 Sürücü, yolculuğu başlatmadan önce yolcudan 4 haneli doğrulama kodunu alıp sisteme girmekle yükümlüdür; kod girilmeden yolculuk başlatılamaz.
+
+5. Ücret, Ödeme, Komisyon/Aidat ve Fiş-Fatura
+
+5.1 Uygulama içinden ödeme yoktur (v1.0).
+5.2 Yolculuk bedeli, taksimetre esas alınarak yolcu tarafından sürücüye doğrudan ödenir (nakit / sürücünün POS’u).
+5.3 Taksibu, v1.0’da taraflardan komisyon/ücret tahsil etmez.
+5.4 Fiş/fatura, yolculuğu yapan taksi/sürücü tarafından düzenlenir; Taksibu yolcu yolculuk bedeline dair belge düzenlemez.
+5.5 İleride sürücüye yönelik aidat/abonelik/komisyon gibi modeller uygulanırsa; bu ücretlendirmeye ilişkin koşullar ayrıca duyurulur ve yürürlüğe alınır.
+
+6. Kullanıcı Davranış Kuralları ve Suistimal
+
+6.1 Kullanıcılar Platformu hukuka uygun ve amacına uygun kullanmayı kabul eder.
+6.2 Sahte hesap, yanıltıcı konum, kötüye kullanım, hileli işlem, taciz/tehdit gibi durumlarda Taksibu; hesabı askıya alabilir, kapatabilir, kayıtları inceleyebilir ve gerekli hallerde yetkili mercilere bildirimde bulunabilir.
+
+7. Sorumluluk Sınırları (Çok Önemli)
+
+7.1 Taksibu; taşıma sözleşmesinin tarafı olmadığından aşağıdaki hallerde sorumluluk kabul etmez:
+
+Sürücünün iptali, yolcunun gecikmesi, randevu/işe geç kalma gibi zaman kayıpları
+
+Sürücünün yolcuya ulaşamaması / zamanında gelememesi
+
+Yolcu ile sürücünün birbirini bulamaması (yanlış konum/pin/iletişim kopması vb.)
+
+GPS sapması, internet kesintisi, harita sağlayıcı kaynaklı hatalar
+
+Araç arızası, yolda kalma, çekilme/bağlanma, “araç yatması”
+
+Trafik kazası/cezası/ihlal, güzergâh tartışması, sürüş tarzı
+
+Araç içi tartışma, kavga, şiddet, hakaret, taciz iddiaları
+
+Unutulan eşyalar (kayıp/hasar/teslim sorumluluğu yoktur)
+
+Ödeme uyuşmazlıkları (para üstü, sahte para, POS arızası, fiş/fatura ihtilafı vb.)
+
+7.2 Taksibu, bu tür olaylarda ancak platform güvenliği açısından gerekli gördüğü tedbirleri alabilir (kayıt inceleme, hesap kısıtlama vb.).
+
+8. Fikri Mülkiyet
+
+Uygulamaya ait tasarım, yazılım, marka, arayüz ve içerik hakları Taksibu’ya aittir. Kullanıcılar bu unsurları izinsiz kopyalayamaz, çoğaltamaz, ticari amaçla kullanamaz.
+
+9. Koşulların Değişmesi
+
+Taksibu, Koşulları ve hizmet modelini güncelleyebilir. Güncel metin uygulama içinde yayımlandığı andan itibaren geçerli olur.
+
+10. Uygulanacak Hukuk ve Yetki
+
+Bu Koşullar Türk hukukuna tabidir. Uyuşmazlıklarda yetkili mahkeme/daireler, tüketici sıfatına göre mevzuat hükümleri saklı kalmak üzere belirlenecektir.
+
+11. İletişim
+
+Resmî iletişim kanalları uygulama içinde ve/veya web sitesinde yayınlanır.

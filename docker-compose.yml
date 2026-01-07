@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # App API
+  api:
+    build: .
+    container_name: taksibu-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
+      - SMS_USERNAME=${SMS_USERNAME}
+      - SMS_PASSWORD=${SMS_PASSWORD}
+      - SMS_ORG=${SMS_ORG}
+      - RIDE_ACCEPT_TIMEOUT_SECONDS=30
+      - LOG_LEVEL=info
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/firebase-service-account.json
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+      - ./firebase-service-account.json:/usr/src/app/firebase-service-account.json
+    depends_on:
+      - mysql
+      - redis
+
+  # Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: taksibu-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-root}
+      - MYSQL_DATABASE=${DB_NAME:-taksibu}
+      - MYSQL_USER=${DB_USER:-root}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-root}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # Ports commented out for security in production (Internal Network Only)
+    # Uncomment if you need external access for debugging
+    # ports:
+    #   - "3306:3306"
+
+  # Redis Service
+  redis:
+    image: redis:6-alpine
+    container_name: taksibu-redis
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASSWORD:-redispass}
+    volumes:
+      - redis_data:/data
+    # Ports commented out for security in production
+    # ports:
+    #     - "6379:6379"
+
+  # Monitoring: Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: taksibu-prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+
+  # Monitoring: Grafana
+  grafana:
+    image: grafana/grafana-oss:9.0.0
+    container_name: taksibu-grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  redis_data:

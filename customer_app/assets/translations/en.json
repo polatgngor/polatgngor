@@ -1,0 +1,265 @@
+{
+    "drawer": {
+        "language": "Language / Dil",
+        "profile": "Profile",
+        "rides": "Ride History",
+        "saved_places": "Saved Places",
+        "contact": "Contact Us",
+        "announcements": "Announcements",
+        "campaigns": "Campaigns",
+        "terms": "Terms of Use",
+        "privacy": "Privacy Policy",
+        "logout": "Logout",
+        "support": "Support & Help",
+        "legal_info": "Legal Information",
+        "clarification": "Clarification Text",
+        "profile_reviews": "{} reviews"
+    },
+    "home": {
+        "greeting": {
+            "morning": "Good Morning",
+            "afternoon": "Good Afternoon",
+            "evening": "Good Evening"
+        },
+        "welcome": "Welcome",
+        "where_to": "Where to?",
+        "confirm_location": "Confirm Location",
+        "finding_driver": "Finding Driver...",
+        "driver_found": "Driver Found!",
+        "driver_arrived": "Driver Arrived",
+        "ride_started": "Ride Started",
+        "ride_completed": "Ride Completed"
+    },
+    "ride": {
+        "start_location": "Start",
+        "end_location": "Destination",
+        "driver": "Driver",
+        "pickup_point": "Pickup Point",
+        "dropoff_point": "Dropoff Point",
+        "status": {
+            "driver_coming": "Driver Coming",
+            "ride_started": "Ride Started",
+            "driver_coming_desc": "Your taxi is coming to your location!",
+            "ride_started_desc": "Have a nice trip."
+        },
+        "driver_arrived_title": "Driver Arrived",
+        "driver_arrived_body": "Please check the license plate.",
+        "verification_code": "VERIFICATION CODE",
+        "enter_code": "Enter Code to Start Trip",
+        "finish_trip": "FINISH TRIP",
+        "end_ride_title": "End Trip",
+        "enter_fare": "Enter taximeter amount",
+        "min_fare_error": "Minimum fare must be 175 TL.",
+        "cancel_ride": "Cancel Trip",
+        "cancel_title": "Cancellation Reason",
+        "cancel_desc": "Why do you want to cancel the trip? Please select a reason.",
+        "cancel_success": "Trip cancelled.",
+        "cancel_fail": "Cancellation failed: {}"
+    },
+    "generic": {
+        "ok": "OK",
+        "cancel": "Cancel",
+        "error": "Error"
+    },
+    "reason": {
+        "driver_far": "Driver is too far",
+        "driver_not_coming": "Driver is not comming",
+        "wrong_location": "I chose wrong location",
+        "changed_mind": "I changed my mind",
+        "found_another": "I found another vehicle",
+        "other": "Other"
+    },
+    "rating": {
+        "title": "Ride Completed!",
+        "subtitle": "How was your ride with {}?",
+        "comment_hint": "Comment about your ride (Optional)",
+        "skip": "Skip",
+        "submit": "Submit",
+        "success": "Rating submitted, thank you!",
+        "error": "Error: {}"
+    },
+    "location_selection": {
+        "title": "Where would you like to go?",
+        "start_hint": "Pickup Point",
+        "end_hint": "Dropoff Point",
+        "current_location": "Current Location",
+        "select_on_map": "Select on Map",
+        "confirm_location": "Confirm Location",
+        "saved_places": "Saved Places",
+        "add_place": "Add",
+        "no_saved_places": "You have no saved places yet.",
+        "search_hint": "Search for a location",
+        "save_dialog": {
+            "title": "Save Address",
+            "label": "Title (e.g. Home, Work)",
+            "cancel": "Cancel",
+            "save": "Save",
+            "error_select_location": "Please select a location first."
+        }
+    },
+    "announcements": {
+        "title_all": "Announcements & Campaigns",
+        "title_announcements": "Announcements",
+        "title_campaigns": "Campaigns",
+        "empty": "No content yet",
+        "campaign_tag": "CAMPAIGN",
+        "error": "An error occurred: {}"
+    },
+    "sheet": {
+        "pickup_title": "PICKUP POINT",
+        "dropoff_title": "DROPOFF POINT",
+        "cancel_button": "Cancel",
+        "searching": {
+            "title": "Finding Driver...",
+            "desc": "Scanning for nearest vehicles, please wait.",
+            "cancel": "Cancel Search"
+        },
+        "no_driver": {
+            "title": "No Driver Found",
+            "desc": "There are no available vehicles in your area right now.\nPlease wait a moment and try again.",
+            "ok": "OK"
+        },
+        "request": {
+            "where_to": "Where to go?",
+            "estimated": "Est. ₺{}",
+            "taxi_yellow": "Yellow Taxi",
+            "taxi_turquoise": "Turquoise",
+            "taxi_vip": "VIP",
+            "taxi_8plus1": "8+1",
+            "option_taximeter": "Open Taximeter",
+            "option_pet": "Pet Friendly",
+            "payment_cash": "Cash",
+            "payment_card": "Credit Card",
+            "payment_pos": "Credit Card (POS)",
+            "call_taxi": "Call Taxi"
+        }
+    },
+    "history": {
+        "title": "Ride History",
+        "no_rides": "No rides yet.",
+        "unknown": "Unknown",
+        "yellow_taxi": "Yellow Taxi",
+        "status": {
+            "completed": "Completed",
+            "cancelled": "Cancelled",
+            "started": "Ongoing",
+            "requested": "Searching",
+            "assigned": "Driver Coming"
+        },
+        "detail": {
+            "title": "Ride Detail",
+            "pickup": "Pickup Point",
+            "dropoff": "Destination",
+            "driver": "Driver",
+            "rating_given": "You Rated",
+            "rate_driver": "Rate Driver",
+            "payment_cash": "Cash",
+            "payment_pos": "Credit Card (POS)",
+            "payment": "Payment"
+        }
+    },
+    "button": {
+        "cancel": "Cancel",
+        "call": "Call",
+        "message": "Message",
+        "confirm": "Confirm",
+        "chat": "Chat"
+    },
+    "chat": {
+        "title": "Chat with Driver",
+        "placeholder": "Type a message...",
+        "send": "Send",
+        "quick_reply_1": "I am coming!",
+        "quick_reply_2": "On my way",
+        "quick_reply_3": "Stuck in traffic",
+        "quick_reply_4": "Where are you?",
+        "quick_reply_5": "OK"
+    },
+    "profile": {
+        "title": "Profile",
+        "edit_title": "Edit Profile",
+        "personal_info": "Personal Information",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "phone": "Phone Number",
+        "change": "Change",
+        "save_changes": "Save Changes",
+        "save": "Save",
+        "change_photo": "Change Photo",
+        "security": "Security",
+        "change_password": "Change Password",
+        "delete_account": "Delete Account",
+        "delete_account_confirm": "Are you sure you want to delete your account? This action cannot be undone.",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "updated": "Profile updated",
+        "deleted": "Your account has been deleted.",
+        "error": "Error: {}",
+        "reference_code": "Reference Code",
+        "required_firstname": "First name is required",
+        "required_lastname": "Last name is required",
+        "coming_soon": "Coming Soon",
+        "change_phone_title": "Change Phone Number",
+        "current_phone": "Current Phone Number",
+        "new_phone": "New Phone Number",
+        "phone_updated": "Phone number updated successfully.",
+        "valid_phone_error": "Please enter a valid phone number",
+        "send_code_btn": "Send Verification Code",
+        "otp_info": "A verification code (OTP) will be sent to your new number."
+    },
+    "auth": {
+        "welcome_title": "Welcome",
+        "enter_phone": "Enter your phone number to continue",
+        "phone_label": "Phone Number",
+        "phone_hint": "5XX XXX XX XX",
+        "continue": "Continue",
+        "otp_verification": "OTP Verification",
+        "enter_code_sent": "Enter the verification code sent to your phone",
+        "verify": "Verify",
+        "didnt_receive": "Didn't receive code?",
+        "resend_code": "Resend Code",
+        "register_title": "Register",
+        "register_header": "Create Account",
+        "register_subtitle": "Register quickly and start riding",
+        "first_name_label": "First Name",
+        "last_name_label": "Last Name",
+        "ref_code_label": "Reference Code (Optional)",
+        "register_btn": "Register",
+        "add_profile_photo": "Add Profile Photo",
+        "validation_phone_required": "Phone Number is required",
+        "register_success": "Registration successful!",
+        "login_fail": "Login failed: {}",
+        "register_fail": "Registration failed: {}"
+    },
+    "settings": {
+        "privacy_title": "Privacy Policy",
+        "terms_title": "Terms of Use",
+        "privacy_text": "At Taksibu, we value the security of your personal data...",
+        "terms_text": "By using the Taksibu app...",
+        "clarification_title": "Clarification Text",
+        "clarification_text": "We would like to inform you about the processing, storage, and transfer of your personal data within the scope of KVKK (Personal Data Protection Law) and relevant legislation.\n\n1. Data Controller\nOur company processes your personal data as a data controller.\n\n2. Purpose of Processing Personal Data\nYour data is processed to improve service quality, fulfill legal obligations, and ensure security.\n\n3. Data Transfer\nYour data is not shared with third parties except for legal obligations.\n\nPlease visit our website for detailed information."
+    },
+    "notification": {
+        "title": "Notifications",
+        "empty": "No notifications.",
+        "default_title": "Notification",
+        "error": "Error: {}"
+    },
+    "support": {
+        "title": "Support & Help",
+        "new_ticket": "New Support Ticket",
+        "no_tickets": "No support tickets yet.",
+        "subject": "Subject",
+        "message_placeholder": "Describe your issue",
+        "submit": "Submit Ticket",
+        "chat_title": "Support Ticket #{}",
+        "ticket_created": "Support ticket created",
+        "subject_required": "Subject is required",
+        "message_required": "Message is required",
+        "message_hint": "Type a message...",
+        "no_messages": "No messages yet.",
+        "send_error": "Failed to send: {}",
+        "subject_hint": "Enter subject...",
+        "message_input_hint": "Describe your problem..."
+    }
+}

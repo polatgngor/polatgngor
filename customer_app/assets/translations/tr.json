@@ -1,0 +1,265 @@
+{
+    "drawer": {
+        "language": "Dil / Language",
+        "profile": "Profil",
+        "rides": "Geçmiş Yolculuklar",
+        "saved_places": "Kaydedilen Yerler",
+        "contact": "Bize Ulaşın",
+        "announcements": "Duyurular",
+        "campaigns": "Kampanyalar",
+        "terms": "Kullanım Koşulları",
+        "privacy": "Gizlilik Politikası",
+        "logout": "Çıkış Yap",
+        "support": "Destek & Yardım",
+        "legal_info": "Yasal Bilgiler",
+        "clarification": "Aydınlatma Metni",
+        "profile_reviews": "{} değerlendirme"
+    },
+    "home": {
+        "greeting": {
+            "morning": "Günaydın",
+            "afternoon": "İyi Günler",
+            "evening": "İyi Akşamlar"
+        },
+        "welcome": "Hoşgeldin",
+        "where_to": "Nereye gitmek istersin?",
+        "confirm_location": "Konumu Onayla",
+        "finding_driver": "Sürücü Aranıyor...",
+        "driver_found": "Sürücü Bulundu!",
+        "driver_arrived": "Sürücü Geldi",
+        "ride_started": "Yolculuk Başladı",
+        "ride_completed": "Yolculuk Tamamlandı"
+    },
+    "ride": {
+        "start_location": "Başlangıç",
+        "end_location": "Varış",
+        "driver": "Sürücü",
+        "pickup_point": "Alış Noktası",
+        "dropoff_point": "Varış Noktası",
+        "status": {
+            "driver_coming": "Sürücü Yolda",
+            "ride_started": "Yolculuk Başladı",
+            "driver_coming_desc": "Taksiniz konumunuza doğru geliyor!",
+            "ride_started_desc": "İyi yolculuklar dileriz."
+        },
+        "driver_arrived_title": "Sürücünüz Konumunuza Geldi",
+        "driver_arrived_body": "Lütfen size gelen aracın plakasını kontrol etmeyi unutmayın.",
+        "verification_code": "DOĞRULAMA KODU",
+        "enter_code": "Yolculuğu Başlatmak İçin Kodu Girin",
+        "finish_trip": "YOLCULUĞU BİTİR",
+        "end_ride_title": "Yolculuğu Bitir",
+        "enter_fare": "Taksimetre tutarını giriniz",
+        "min_fare_error": "Minimum tutar 175 TL olmalıdır.",
+        "cancel_ride": "Yolculuğu İptal Et",
+        "cancel_title": "İptal Nedeni",
+        "cancel_desc": "Yolculuğu neden iptal etmek istiyorsunuz? Lütfen bir sebep seçin.",
+        "cancel_success": "Yolculuk iptal edildi.",
+        "cancel_fail": "İptal işlemi başarısız: {}"
+    },
+    "generic": {
+        "ok": "Tamam",
+        "cancel": "İptal",
+        "error": "Hata"
+    },
+    "reason": {
+        "driver_far": "Sürücü çok uzakta",
+        "driver_not_coming": "Sürücü gelmiyor",
+        "wrong_location": "Yanlış konum seçtim",
+        "changed_mind": "Fikir değiştirdim",
+        "found_another": "Başka bir araç buldum",
+        "other": "Diğer"
+    },
+    "rating": {
+        "title": "Yolculuk Tamamlandı!",
+        "subtitle": "{} ile yolculuğunuz nasıldı?",
+        "comment_hint": "Yolculuk hakkında yorumunuz (İsteğe bağlı)",
+        "skip": "Atla",
+        "submit": "Gönder",
+        "success": "Puanınız gönderildi, teşekkürler!",
+        "error": "Hata: {}"
+    },
+    "location_selection": {
+        "title": "Nereye Gitmek İstersiniz?",
+        "start_hint": "Başlangıç Noktası",
+        "end_hint": "Bitiş Noktası",
+        "current_location": "Mevcut Konum",
+        "select_on_map": "Haritadan Seç",
+        "confirm_location": "Konumu Onayla",
+        "saved_places": "Kayıtlı Adreslerim",
+        "add_place": "Ekle",
+        "no_saved_places": "Henüz kayıtlı adresiniz yok.",
+        "search_hint": "Bir konum arayın",
+        "save_dialog": {
+            "title": "Adresi Kaydet",
+            "label": "Başlık (Örn: Ev, İş)",
+            "cancel": "İptal",
+            "save": "Kaydet",
+            "error_select_location": "Lütfen önce bir konum seçin."
+        }
+    },
+    "announcements": {
+        "title_all": "Duyurular ve Kampanyalar",
+        "title_announcements": "Duyurular",
+        "title_campaigns": "Kampanyalar",
+        "empty": "Henüz bir içerik yok",
+        "campaign_tag": "KAMPANYA",
+        "error": "Bir hata oluştu: {}"
+    },
+    "sheet": {
+        "pickup_title": "ALIŞ NOKTASI",
+        "dropoff_title": "VARIŞ NOKTASI",
+        "cancel_button": "Vazgeç",
+        "searching": {
+            "title": "Sürücü Aranıyor...",
+            "desc": "Size en yakın araçlar taranıyor, lütfen bekleyin.",
+            "cancel": "Aramayı İptal Et"
+        },
+        "no_driver": {
+            "title": "Uygun Sürücü Bulunamadı",
+            "desc": "Şu anda bölgenizde uygun araç bulunmuyor.\nLütfen biraz bekleyip tekrar deneyin.",
+            "ok": "Tamam"
+        },
+        "request": {
+            "where_to": "Nereye gitmek istersiniz?",
+            "estimated": "Tah. ₺{}",
+            "taxi_yellow": "Sarı Taksi",
+            "taxi_turquoise": "Turkuaz Taksi",
+            "taxi_vip": "VIP Taksi",
+            "taxi_8plus1": "8+1 Taksi",
+            "option_taximeter": "Taksimetreni aç gel",
+            "option_pet": "Evcil Hayvan",
+            "payment_cash": "Araçta Nakit",
+            "payment_pos": "Araçta POS",
+            "call_taxi": "Taksi Çağır"
+        }
+    },
+    "history": {
+        "title": "Geçmiş Yolculuklar",
+        "no_rides": "Henüz yolculuk yapmadınız.",
+        "unknown": "Bilinmiyor",
+        "yellow_taxi": "Sarı Taksi",
+        "status": {
+            "completed": "Tamamlandı",
+            "cancelled": "İptal Edildi",
+            "started": "Sürüyor",
+            "requested": "Aranıyor",
+            "assigned": "Sürücü Geliyor"
+        },
+        "detail": {
+            "title": "Yolculuk Detayı",
+            "pickup": "Alış Noktası",
+            "dropoff": "Varış Noktası",
+            "driver": "Sürücü",
+            "rating_given": "Sürücüye Verdiğiniz Puan",
+            "rate_driver": "Sürücüyü Puanla",
+            "payment_cash": "Nakit",
+            "payment_pos": "Kredi Kartı (POS)",
+            "payment": "Ödeme"
+        }
+    },
+    "button": {
+        "cancel": "İptal",
+        "call": "Ara",
+        "message": "Mesaj",
+        "confirm": "Onayla",
+        "chat": "Sohbet"
+    },
+    "chat": {
+        "title": "Sürücü ile Sohbet",
+        "placeholder": "Bir mesaj yazın...",
+        "send": "Gönder",
+        "quick_reply_1": "Geliyorum!",
+        "quick_reply_2": "Yoldayım",
+        "quick_reply_3": "Trafikteyim",
+        "quick_reply_4": "Neredesiniz?",
+        "quick_reply_5": "Tamam"
+    },
+    "profile": {
+        "title": "Profil",
+        "edit_title": "Profili Düzenle",
+        "personal_info": "Kişisel Bilgiler",
+        "first_name": "Ad",
+        "last_name": "Soyad",
+        "phone": "Telefon Numarası",
+        "change": "Değiştir",
+        "save_changes": "Değişiklikleri Kaydet",
+        "save": "Kaydet",
+        "change_photo": "Fotoğrafı Değiştir",
+        "security": "Güvenlik",
+        "change_password": "Şifre Değiştir",
+        "delete_account": "Hesabı Sil",
+        "delete_account_confirm": "Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+        "cancel": "Vazgeç",
+        "delete": "Sil",
+        "updated": "Profil güncellendi",
+        "deleted": "Hesabınız silindi.",
+        "error": "Hata: {}",
+        "reference_code": "Referans Kodu",
+        "required_firstname": "Ad zorunludur",
+        "required_lastname": "Soyad zorunludur",
+        "coming_soon": "Yakında",
+        "change_phone_title": "Telefon Numarası Değiştir",
+        "current_phone": "Şu anki Numaranız",
+        "new_phone": "Yeni Telefon Numarası",
+        "phone_updated": "Telefon numaranız başarıyla güncellendi.",
+        "valid_phone_error": "Geçerli bir telefon numarası giriniz",
+        "send_code_btn": "Doğrulama Kodu Gönder",
+        "otp_info": "Yeni numaranıza bir doğrulama kodu (OTP) gönderilecektir."
+    },
+    "auth": {
+        "welcome_title": "Hoşgeldiniz",
+        "enter_phone": "Devam etmek için telefon numaranızı girin",
+        "phone_label": "Telefon Numarası",
+        "phone_hint": "5XX XXX XX XX",
+        "continue": "Devam Et",
+        "otp_verification": "OTP Doğrulama",
+        "verify_title": "Doğrulama Kodu",
+        "enter_code_sent": "Lütfen telefonunuza gönderilen doğrulama kodunu girin",
+        "verify": "Doğrula",
+        "didnt_receive": "Kodu almadınız mı?",
+        "resend_code": "Tekrar Gönder",
+        "register_title": "Kayıt Ol",
+        "register_header": "Hesap Oluştur",
+        "register_subtitle": "Hızlıca kayıt olup yolculuğa başla",
+        "first_name_label": "Ad",
+        "last_name_label": "Soyad",
+        "ref_code_label": "Referans Kodu (Opsiyonel)",
+        "register_btn": "Kayıt Ol",
+        "add_profile_photo": "Profil Fotoğrafı Ekle",
+        "validation_phone_required": "Telefon numarası gereklidir",
+        "register_success": "Kayıt başarılı!",
+        "login_fail": "Giriş başarısız: {}",
+        "register_fail": "Kayıt başarısız: {}"
+    },
+    "settings": {
+        "privacy_title": "Gizlilik Politikası",
+        "terms_title": "Kullanım Koşulları",
+        "privacy_text": "Taksibu olarak kişisel verilerinizin güvenliğine önem veriyoruz...",
+        "terms_text": "Taksibu uygulamasını kullanarak...",
+        "clarification_title": "Aydınlatma Metni",
+        "clarification_text": "KVKK ve ilgili yasal mevzuat kapsamında, kişisel verilerinizin işlenmesi, saklanması ve aktarılması konusunda sizi bilgilendirmek isteriz.\n\n1. Veri Sorumlusu\nŞirketimiz, kişisel verilerinizi veri sorumlusu sıfatıyla işlemektedir.\n\n2. Kişisel Verilerin İşlenme Amacı\nVerileriniz, hizmet kalitesini artırmak, yasal yükümlülükleri yerine getirmek ve güvenliği sağlamak amacıyla işlenmektedir.\n\n3. Veri Aktarımı\nVerileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmamaktadır.\n\nDetaylı bilgi için lütfen web sitemizi ziyaret ediniz."
+    },
+    "notification": {
+        "title": "Bildirimler",
+        "empty": "Bildiriminiz yok.",
+        "default_title": "Bildirim",
+        "error": "Hata: {}"
+    },
+    "support": {
+        "title": "Destek & Yardım",
+        "new_ticket": "Yeni Destek Talebi",
+        "no_tickets": "Henüz destek talebiniz yok.",
+        "subject": "Konu",
+        "message_placeholder": "Sorununuz",
+        "submit": "Talebi Gönder",
+        "chat_title": "Destek #{}",
+        "ticket_created": "Destek talebi oluşturuldu",
+        "subject_required": "Konu gerekli",
+        "message_required": "Mesaj gerekli",
+        "message_hint": "Mesaj yazın...",
+        "no_messages": "Henüz mesaj yok.",
+        "send_error": "Gönderilemedi: {}",
+        "subject_hint": "Konu giriniz...",
+        "message_input_hint": "Sorununuzu açıklayınız..."
+    }
+}

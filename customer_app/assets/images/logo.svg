@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_1" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 512">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-2 {
+        fill: #0866ff;
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 225px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(79.56 328.98)"><tspan class="cls-1" x="0" y="0">t</tspan><tspan x="93.83" y="0">a</tspan><tspan class="cls-1" x="232.65" y="0">k</tspan><tspan x="375.98" y="0">sibu</tspan></text>
+</svg>
