@@ -50,10 +50,17 @@
 			<key>NSAllowsArbitraryLoads</key>
 			<true/>
 		</dict>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Konumunuzu haritada göstermek ve taksi çağırmak için kullanıyoruz.</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>Konumunuzu haritada göstermek ve taksi çağırmak için kullanıyoruz.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Konumunuzu haritada göstermek ve taksi çağırmak için kullanıyoruz.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Konumunuzu haritada göstermek ve taksi çağırmak için kullanıyoruz.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Konumunuzu haritada göstermek ve taksi çağırmak için kullanıyoruz.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Profil fotoğrafı yüklemek için galeri izni gerekiyor.</string>
 		<key>NSCameraUsageDescription</key>
