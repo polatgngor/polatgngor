@@ -1,7 +1,7 @@
 name: driver_app
 description: "Taksibu Sürücü Uygulaması"
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.0+1
 
 environment:
   sdk: ^3.5.0
@@ -44,7 +44,7 @@ dependencies:
   flutter_local_notifications: ^18.0.0
   easy_localization: ^3.0.7
   firebase_core: ^4.3.0
-  firebase_crashlytics: ^4.3.0
+  firebase_crashlytics: ^5.0.0
   firebase_messaging: ^16.1.0
   fl_chart: ^0.68.0
   # Audio
