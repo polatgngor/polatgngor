@@ -58,7 +58,12 @@
 		<string>Profil fotoğrafı yüklemek için galeri izni gerekiyor.</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Profil fotoğrafı çekmek için kamera izni gerekiyor.</string>
-		<key>UIStatusBarHidden</key>
-		<false/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	</dict>
 </plist>
