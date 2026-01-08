@@ -9,9 +9,11 @@ import 'core/services/notification_service.dart';
 
 import 'core/utils/globals.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'dart:io';
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import '../../features/auth/presentation/auth_provider.dart';
+import 'firebase_options_manual.dart';
 
 void main() async {
   runZonedGuarded(() async {
@@ -19,7 +21,13 @@ void main() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     
     try {
-      await Firebase.initializeApp();
+      if (Platform.isIOS) {
+        await Firebase.initializeApp(
+          options: ManualFirebaseOptions.currentPlatform,
+        );
+      } else {
+        await Firebase.initializeApp();
+      }
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
       await EasyLocalization.ensureInitialized();
