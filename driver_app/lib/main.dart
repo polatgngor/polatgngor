@@ -9,54 +9,64 @@ import 'features/auth/presentation/auth_provider.dart';
 import 'core/services/background_service.dart';
 import 'core/services/notification_service.dart';
 import 'core/services/ringtone_service.dart';
+import 'dart:async';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  
-  await EasyLocalization.ensureInitialized();
-  
-  // Fire and forget - don't block app startup
-  NotificationService().initialize();
-  BackgroundService.initializeService();
-  
-  // CHECK FOR PENDING CALL SOUND
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    final bool? pendingSound = prefs.getBool('pending_call_sound');
-    final String? timestampStr = prefs.getString('pending_call_timestamp');
+  runZonedGuarded(() async {
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    
+    await Firebase.initializeApp();
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-    if (pendingSound == true && timestampStr != null) {
-      final DateTime timestamp = DateTime.parse(timestampStr);
-      final DateTime now = DateTime.now();
-      // Only play if the trigger was recent (e.g., within last 30 seconds)
-      if (now.difference(timestamp).inSeconds < 30) {
-        debugPrint("Main: Pending call sound detected within valid time window. Playing Ringtone.");
-        // Play Ringtone Immediately
-        await RingtoneService().playRingtone();
-        
-        // Clear flag
-        await prefs.remove('pending_call_sound');
-        await prefs.remove('pending_call_timestamp');
-      } else {
-         debugPrint("Main: Pending call sound detected but expired. Clearing.");
-         await prefs.remove('pending_call_sound');
-         await prefs.remove('pending_call_timestamp');
+    await EasyLocalization.ensureInitialized();
+    
+    // Fire and forget - don't block app startup
+    NotificationService().initialize();
+    BackgroundService.initializeService();
+    
+    // CHECK FOR PENDING CALL SOUND
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final bool? pendingSound = prefs.getBool('pending_call_sound');
+      final String? timestampStr = prefs.getString('pending_call_timestamp');
+
+      if (pendingSound == true && timestampStr != null) {
+        final DateTime timestamp = DateTime.parse(timestampStr);
+        final DateTime now = DateTime.now();
+        // Only play if the trigger was recent (e.g., within last 30 seconds)
+        if (now.difference(timestamp).inSeconds < 30) {
+          debugPrint("Main: Pending call sound detected within valid time window. Playing Ringtone.");
+          // Play Ringtone Immediately
+          await RingtoneService().playRingtone();
+          
+          // Clear flag
+          await prefs.remove('pending_call_sound');
+          await prefs.remove('pending_call_timestamp');
+        } else {
+           debugPrint("Main: Pending call sound detected but expired. Clearing.");
+           await prefs.remove('pending_call_sound');
+           await prefs.remove('pending_call_timestamp');
+        }
       }
+    } catch (e) {
+      debugPrint("Main: Error checking pending sound: $e");
     }
-  } catch (e) {
-    debugPrint("Main: Error checking pending sound: $e");
-  }
 
-  runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale('tr'), Locale('en')],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('tr'),
-      startLocale: const Locale('tr'),
-      child: const ProviderScope(child: DriverApp()),
-    ),
-  );
+    runApp(
+      EasyLocalization(
+        supportedLocales: const [Locale('tr'), Locale('en')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('tr'),
+        startLocale: const Locale('tr'),
+        child: const ProviderScope(child: DriverApp()),
+      ),
+    );
+  }, (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  });
 }
 
 class DriverApp extends ConsumerWidget {

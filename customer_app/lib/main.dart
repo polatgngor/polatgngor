@@ -9,25 +9,33 @@ import 'core/services/notification_service.dart';
 
 import 'core/utils/globals.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'dart:async';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import '../../features/auth/presentation/auth_provider.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  
-  await Firebase.initializeApp();
-  await EasyLocalization.ensureInitialized();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  
-  runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale('tr'), Locale('en')],
-      path: 'assets/translations', 
-      fallbackLocale: const Locale('tr'),
-      startLocale: const Locale('tr'),
-      child: const ProviderScope(child: MyApp()),
-    ),
-  );
+  runZonedGuarded(() async {
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    
+    await Firebase.initializeApp();
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    await EasyLocalization.ensureInitialized();
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    
+    runApp(
+      EasyLocalization(
+        supportedLocales: const [Locale('tr'), Locale('en')],
+        path: 'assets/translations', 
+        fallbackLocale: const Locale('tr'),
+        startLocale: const Locale('tr'),
+        child: const ProviderScope(child: MyApp()),
+      ),
+    );
+  }, (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  });
 }
 
 class MyApp extends ConsumerWidget {
