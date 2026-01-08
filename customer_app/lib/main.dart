@@ -18,24 +18,61 @@ void main() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     
-    await Firebase.initializeApp();
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    try {
+      await Firebase.initializeApp();
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-    await EasyLocalization.ensureInitialized();
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    
-    runApp(
-      EasyLocalization(
-        supportedLocales: const [Locale('tr'), Locale('en')],
-        path: 'assets/translations', 
-        fallbackLocale: const Locale('tr'),
-        startLocale: const Locale('tr'),
-        child: const ProviderScope(child: MyApp()),
-      ),
-    );
+      await EasyLocalization.ensureInitialized();
+      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+      
+      runApp(
+        EasyLocalization(
+          supportedLocales: const [Locale('tr'), Locale('en')],
+          path: 'assets/translations', 
+          fallbackLocale: const Locale('tr'),
+          startLocale: const Locale('tr'),
+          child: const ProviderScope(child: MyApp()),
+        ),
+      );
+    } catch (e, s) {
+      debugPrint("Startup Error: $e");
+      FlutterNativeSplash.remove();
+      runApp(ErrorApp(message: "Başlatma Hatası: $e"));
+    }
   }, (error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
   });
+}
+
+class ErrorApp extends StatelessWidget {
+  final String message;
+  const ErrorApp({super.key, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, color: Colors.red, size: 60),
+                  const SizedBox(height: 20),
+                  const Text("Uygulama Başlatılamadı", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 10),
+                  SelectableText(message, textAlign: TextAlign.center, style: const TextStyle(color: Colors.red)),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends ConsumerWidget {
