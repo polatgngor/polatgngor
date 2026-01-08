@@ -15,14 +15,9 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   
-  try {
-    await Firebase.initializeApp();
-    await EasyLocalization.ensureInitialized();
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  } catch (e) {
-    debugPrint('Startup Initialization Error: $e');
-    // Proceed anyway to allow UI to render (and potential error handling/splash removal)
-  }
+  await Firebase.initializeApp();
+  await EasyLocalization.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   
   runApp(
     EasyLocalization(

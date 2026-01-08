@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class LocationPermissionScreen extends ConsumerStatefulWidget {
   const LocationPermissionScreen({super.key});
@@ -18,8 +17,6 @@ class _LocationPermissionScreenState extends ConsumerState<LocationPermissionScr
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    // Ensure splash is removed if we land here
-    FlutterNativeSplash.remove();
     _checkPermissions(); // Check immediately
   }
 

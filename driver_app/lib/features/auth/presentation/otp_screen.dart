@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:pinput/pinput.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../../core/widgets/custom_toast.dart';
 import 'auth_provider.dart';
 
@@ -28,7 +27,6 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   @override
   void initState() {
     super.initState();
-    FlutterNativeSplash.remove(); // Safety for restore scenarios
     startTimer();
   }
 

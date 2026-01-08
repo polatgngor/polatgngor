@@ -14,14 +14,14 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   
+  await EasyLocalization.ensureInitialized();
+  
+  // Fire and forget - don't block app startup
+  NotificationService().initialize();
+  BackgroundService.initializeService();
+  
+  // CHECK FOR PENDING CALL SOUND
   try {
-    await EasyLocalization.ensureInitialized();
-  
-    // Fire and forget - don't block app startup
-    NotificationService().initialize();
-    BackgroundService.initializeService();
-  
-    // CHECK FOR PENDING CALL SOUND
     final prefs = await SharedPreferences.getInstance();
     final bool? pendingSound = prefs.getBool('pending_call_sound');
     final String? timestampStr = prefs.getString('pending_call_timestamp');
@@ -45,7 +45,7 @@ void main() async {
       }
     }
   } catch (e) {
-    debugPrint("Main Warning: Initialization error (proceeding to app): $e");
+    debugPrint("Main: Error checking pending sound: $e");
   }
 
   runApp(

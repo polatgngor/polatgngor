@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'auth_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../data/auth_service.dart' as auth_service;
 
 class PendingScreen extends ConsumerStatefulWidget {
@@ -18,7 +17,6 @@ class _PendingScreenState extends ConsumerState<PendingScreen> with SingleTicker
   @override
   void initState() {
     super.initState();
-    FlutterNativeSplash.remove(); // Fix stuck splash for pending users
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),

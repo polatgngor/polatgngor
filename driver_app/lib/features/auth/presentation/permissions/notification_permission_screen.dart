@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../../../core/providers/onboarding_provider.dart';
 
 class NotificationPermissionScreen extends ConsumerStatefulWidget {
@@ -19,7 +18,6 @@ class _NotificationPermissionScreenState extends ConsumerState<NotificationPermi
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    FlutterNativeSplash.remove(); // Ensure splash is removed
     _checkPermissionAndContinue(); // Check immediately
   }
 

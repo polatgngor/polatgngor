@@ -66,7 +66,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    FlutterNativeSplash.remove(); // Ensure splash is removed on Home
     
     // OPTIMIZED: Delay heavy content (Map) initialization by one frame
     // This ensures the navigation to this screen is INSTANT (showing the loading screen)

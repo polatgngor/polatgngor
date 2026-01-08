@@ -17,9 +17,11 @@ class _BackgroundPermissionScreenState extends ConsumerState<BackgroundPermissio
   @override
   void initState() {
     super.initState();
+    // Valid entry point, remove splash
+    FlutterNativeSplash.remove();
+
     WidgetsBinding.instance.addObserver(this);
-    FlutterNativeSplash.remove(); // Ensure splash is removed
-    _checkPermissions(); // Check immediately
+    _checkPermissions(); // Check immediately on enter
   }
 
   @override
@@ -36,13 +38,6 @@ class _BackgroundPermissionScreenState extends ConsumerState<BackgroundPermissio
   }
 
   Future<void> _checkPermissions() async {
-    if (Theme.of(context).platform == TargetPlatform.iOS) {
-      if (mounted) {
-        context.go('/permission-notification');
-      }
-      return;
-    }
-
     final batteryStatus = await Permission.ignoreBatteryOptimizations.status;
     final overlayStatus = await Permission.systemAlertWindow.status;
 
@@ -56,16 +51,14 @@ class _BackgroundPermissionScreenState extends ConsumerState<BackgroundPermissio
   Future<void> _requestPermissions() async {
     setState(() => _isLoading = true);
 
-    if (Theme.of(context).platform == TargetPlatform.android) {
-        // 1. Overlay (System Alert Window)
-        if (!await Permission.systemAlertWindow.isGranted) {
-           await Permission.systemAlertWindow.request();
-        }
-        
-        // 2. Battery Optimization
-        if (!await Permission.ignoreBatteryOptimizations.isGranted) {
-           await Permission.ignoreBatteryOptimizations.request();
-        }
+    // 1. Overlay (System Alert Window)
+    if (!await Permission.systemAlertWindow.isGranted) {
+       await Permission.systemAlertWindow.request();
+    }
+    
+    // 2. Battery Optimization
+    if (!await Permission.ignoreBatteryOptimizations.isGranted) {
+       await Permission.ignoreBatteryOptimizations.request();
     }
 
     setState(() => _isLoading = false);

@@ -42,7 +42,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       // Check current state
       final authState = ref.read(authProvider);
       
-      if (!authState.isLoading) {
+      if (!authState.isLoading && authState.value == null) {
          FlutterNativeSplash.remove();
       } else {
          // If still loading, we rely on the listener in build() or here?
@@ -100,7 +100,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     
     // Listen for Auth Loading Completion to remove Splash
     ref.listen(authProvider, (previous, next) {
-       if (!next.isLoading) {
+       if (!next.isLoading && next.value == null) {
           FlutterNativeSplash.remove();
        }
     });
