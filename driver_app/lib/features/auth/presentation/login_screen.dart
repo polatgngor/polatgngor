@@ -38,7 +38,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
        // Check immediately (in case already loaded)
        final authState = ref.read(authProvider);
-       if (!authState.isLoading && authState.value == null) {
+       if (!authState.isLoading) {
           FlutterNativeSplash.remove();
        }
     });
@@ -90,7 +90,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     // Listen for Auth Loading Completion to remove Splash
     ref.listen(authProvider, (previous, next) {
-       if (!next.isLoading && next.value == null) {
+       if (!next.isLoading) {
           FlutterNativeSplash.remove();
        }
     });

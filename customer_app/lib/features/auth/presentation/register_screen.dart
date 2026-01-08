@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'auth_provider.dart';
 import '../../../../core/widgets/custom_toast.dart';
 
@@ -24,6 +25,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   late String phone;
   late String verificationToken;
+
+  @override
+  void initState() {
+    super.initState();
+    FlutterNativeSplash.remove(); // Redundant safety check
+  }
 
   @override
   void didChangeDependencies() {

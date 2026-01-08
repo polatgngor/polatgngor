@@ -17,11 +17,9 @@ class _BackgroundPermissionScreenState extends ConsumerState<BackgroundPermissio
   @override
   void initState() {
     super.initState();
-    // Valid entry point, remove splash
-    FlutterNativeSplash.remove();
-
     WidgetsBinding.instance.addObserver(this);
-    _checkPermissions(); // Check immediately on enter
+    FlutterNativeSplash.remove(); // Ensure splash is removed
+    _checkPermissions(); // Check immediately
   }
 
   @override

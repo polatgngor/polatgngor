@@ -67,5 +67,7 @@
 		<string>Profil fotoğrafı çekmek için kamera izni gerekiyor.</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	</dict>
 </plist>
