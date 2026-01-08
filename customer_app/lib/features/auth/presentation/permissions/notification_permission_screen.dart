@@ -59,7 +59,7 @@ class _NotificationPermissionScreenState extends ConsumerState<NotificationPermi
 
     if (status.isGranted) {
         if (mounted) await _completeOnboarding();
-    } else if (status.isPermanentlyDenied) {
+    } else if (status.isPermanentlyDenied || status.isRestricted) {
         openAppSettings();
     }
   }
