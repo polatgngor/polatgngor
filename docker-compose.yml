@@ -8,17 +8,19 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     environment:
       - PORT=3000
       - NODE_ENV=production
       - DB_HOST=mysql
       - DB_PORT=3306
-      - DB_USER=${DB_USER:-root}
-      - DB_PASS=${DB_PASSWORD:-Polat.159357}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=${REDIS_PASSWORD:-redispass}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
       - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
       - SMS_USERNAME=${SMS_USERNAME}
@@ -41,10 +43,10 @@ services:
     container_name: taksibu-mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-Polat.159357}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME:-taksibu}
-      - MYSQL_USER=${DB_USER:-root}
-      - MYSQL_PASSWORD=${DB_PASSWORD:-Polat.159357}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
     # Ports commented out for security in production (Internal Network Only)
@@ -57,7 +59,7 @@ services:
     image: redis:6-alpine
     container_name: taksibu-redis
     restart: always
-    command: redis-server --requirepass ${REDIS_PASSWORD:-redispass}
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
       - redis_data:/data
     # Ports commented out for security in production
