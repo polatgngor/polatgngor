@@ -134,9 +134,35 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _showDebugInfo() async {
+    if (!mounted) return;
+    
+    // Show loading indictator
+    CustomNotificationService().show(context, 'Tokenlar alınıyor...', ToastType.info);
+
     try {
+      // 1. Request Permission explicitly
+      final settings = await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      print('User granted permission: ${settings.authorizationStatus}');
+
+      // 2. Get APNs (iOS specific) - WAIT for it
+      String? apnsToken;
+      if (Platform.isIOS) {
+        // Retry a few times for APNs
+        for (int i = 0; i < 3; i++) {
+          apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+          if (apnsToken != null) break;
+          await Future.delayed(const Duration(seconds: 1));
+        }
+      } else {
+        apnsToken = 'Android (Not applicable)';
+      }
+
+      // 3. Get FCM
       final fcmToken = await FirebaseMessaging.instance.getToken();
-      final apnsToken = Platform.isIOS ? await FirebaseMessaging.instance.getAPNSToken() : 'Android';
       
       if (!mounted) return;
 
@@ -144,19 +170,27 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Debug Test Bilgileri'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('FCM Token (Firebase):', style: TextStyle(fontWeight: FontWeight.bold)),
-              SelectableText(fcmToken ?? 'YOK'),
-              const SizedBox(height: 12),
-              const Text('APNs Token (Apple):', style: TextStyle(fontWeight: FontWeight.bold)),
-              SelectableText(apnsToken ?? 'YOK (HATA)'),
-              const SizedBox(height: 12),
-              const Text('Talimat:', style: TextStyle(fontSize: 12, color: Colors.grey)),
-              const Text('FCM Token\'ı kopyalayıp Firebase Console -> Messaging -> Send Test Message kısmına yapıştırın.', style: TextStyle(fontSize: 12)),
-            ],
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('İzin Durumu:', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(settings.authorizationStatus.toString()),
+                const SizedBox(height: 12),
+                
+                const Text('APNs Token (Apple):', style: TextStyle(fontWeight: FontWeight.bold)),
+                SelectableText(apnsToken ?? 'YOK (HATA: Bildirim İzni veya Push Capability Eksik)'),
+                const SizedBox(height: 12),
+
+                const Text('FCM Token (Firebase):', style: TextStyle(fontWeight: FontWeight.bold)),
+                SelectableText(fcmToken ?? 'YOK (APNs bekleniyor olabilir)'),
+                const SizedBox(height: 12),
+                
+                const Text('Talimat:', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                const Text('FCM Token\'ı kopyalayıp Firebase Console -> Messaging -> Send Test Message kısmına yapıştırın.', style: TextStyle(fontSize: 12)),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -167,7 +201,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
       );
     } catch (e) {
-      CustomNotificationService().show(context, 'Hata: $e', ToastType.error);
+      if (mounted) {
+        CustomNotificationService().show(context, 'Hata oluştu: $e', ToastType.error);
+      }
     }
   }
 
