@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'dart:io';
+import 'dart:io'; 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../auth/presentation/auth_provider.dart';
@@ -132,6 +133,44 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
   }
 
+  Future<void> _showDebugInfo() async {
+    try {
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      final apnsToken = Platform.isIOS ? await FirebaseMessaging.instance.getAPNSToken() : 'Android';
+      
+      if (!mounted) return;
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Debug Test Bilgileri'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('FCM Token (Firebase):', style: TextStyle(fontWeight: FontWeight.bold)),
+              SelectableText(fcmToken ?? 'YOK'),
+              const SizedBox(height: 12),
+              const Text('APNs Token (Apple):', style: TextStyle(fontWeight: FontWeight.bold)),
+              SelectableText(apnsToken ?? 'YOK (HATA)'),
+              const SizedBox(height: 12),
+              const Text('Talimat:', style: TextStyle(fontSize: 12, color: Colors.grey)),
+              const Text('FCM Token\'ı kopyalayıp Firebase Console -> Messaging -> Send Test Message kısmına yapıştırın.', style: TextStyle(fontSize: 12)),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Kapat'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      CustomNotificationService().show(context, 'Hata: $e', ToastType.error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
@@ -156,7 +195,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         padding: const EdgeInsets.all(24),
         children: [
           const SizedBox(height: 10),
-          // Profile Avatar
           // Profile Avatar
           Center(
             child: GestureDetector(
@@ -209,7 +247,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
 
           const SizedBox(height: 16),
-          // Rating Display
           // Rating Display
           Column(
             children: [
@@ -310,7 +347,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           
           const SizedBox(height: 16),
 
-
+          _buildActionTile(
+            context,
+            'Debug Bilgileri (FCM/APNS)',
+            Icons.bug_report_outlined,
+            Colors.blueGrey,
+            _showDebugInfo,
+          ),
           
           // Reduced spacing
           const SizedBox(height: 16),
