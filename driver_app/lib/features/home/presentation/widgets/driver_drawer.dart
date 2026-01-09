@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import '../../../../core/widgets/custom_toast.dart';
+import 'dart:io';
 import '../../../auth/data/auth_service.dart';
 import '../../../auth/presentation/auth_provider.dart';
 import '../../../auth/presentation/auth_provider.dart';
@@ -237,6 +240,12 @@ class _DriverDrawerState extends ConsumerState<DriverDrawer> with SingleTickerPr
                     context.push('/support');
                   },
                 ),
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.bug_report_outlined,
+                  title: 'Debug Bilgisi',
+                  onTap: _showDebugInfo,
+                ),
                 Theme(
                   data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                   child: ExpansionTile(
@@ -401,6 +410,44 @@ class _DriverDrawerState extends ConsumerState<DriverDrawer> with SingleTickerPr
       ),
      ),
     );
+  }
+
+  Future<void> _showDebugInfo() async {
+    try {
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      final apnsToken = Platform.isIOS ? await FirebaseMessaging.instance.getAPNSToken() : 'Android';
+      
+      if (!mounted) return;
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Debug Test Bilgileri'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('FCM Token (Firebase):', style: TextStyle(fontWeight: FontWeight.bold)),
+              SelectableText(fcmToken ?? 'YOK'),
+              const SizedBox(height: 12),
+              const Text('APNs Token (Apple):', style: TextStyle(fontWeight: FontWeight.bold)),
+              SelectableText(apnsToken ?? 'YOK (HATA)'),
+              const SizedBox(height: 12),
+              const Text('Talimat:', style: TextStyle(fontSize: 12, color: Colors.grey)),
+              const Text('FCM Token\'ı kopyalayıp Firebase Console -> Messaging -> Send Test Message kısmına yapıştırın.', style: TextStyle(fontSize: 12)),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Kapat'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      CustomNotificationService().show(context, 'Hata: $e', ToastType.error);
+    }
   }
 
   Widget _buildDrawerItem(
