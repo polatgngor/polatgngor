@@ -1,0 +1,198 @@
+TAKSİBU GİZLİLİK POLİTİKASI
+
+Yürürlük Tarihi: 29.12.2025
+Sürüm: v1.0
+Veri Sorumlusu: Taksibu (bu metinde “Taksibu”, “Platform” veya “Şirket” olarak anılacaktır)
+
+Taksibu olarak, mobil uygulamalarımızı (Yolcu Uygulaması ve Sürücü Uygulaması), yönetim panelimizi ve ilgili dijital kanallarımızı kullanan kişilerin bilgilerinin gizliliğine önem veririz. Bu Gizlilik Politikası, Taksibu’nun hangi bilgileri topladığını, bu bilgileri hangi amaçlarla kullandığını, hangi durumlarda paylaşabileceğini, nasıl koruduğunu ve kullanıcıların sorumluluklarını genel hatlarıyla açıklar.
+
+Önemli Açıklama – Platformun Niteliği:
+Taksibu, yolcu ile hali hazırda faaliyette bulunan ticari taksi sürücülerini dijital ortamda buluşturan bir aracılık/kolaylaştırma platformudur. Taksibu’nun çalışma prensibi, sokaktan taksi çevirme pratiğine benzer şekilde tarafların birbirini daha hızlı ve pratik biçimde bulmasını sağlayan dijital bir kolaylıktır. Taşıma hizmetinin tarafı Taksibu değildir; yolculuk fiilen ve hukuken yolcu ile sürücü arasında gerçekleşir.
+
+1) Kapsam
+
+Bu Politika;
+
+Yolcu Uygulaması kullanıcılarını,
+
+Sürücü Uygulaması kullanıcılarını,
+
+Taksibu destek/iletişim kanallarını kullanan kişileri,
+
+(varsa) web sitesi ziyaretçilerini ve
+
+(gerektiğinde) iş ortakları/tedarikçi temsilcilerini
+kapsar.
+
+Bu Politika, KVKK aydınlatma metninin yerine geçmez. Kişisel verilerin işlenmesine ilişkin detaylı hukuki çerçeve için Taksibu Kişisel Verilerin İşlenmesi ve Korunması / Aydınlatma Metni geçerlidir.
+
+2) Toplayabileceğimiz Bilgiler
+
+Taksibu, hizmetin çalışması ve güvenli şekilde yürütülmesi için bazı bilgileri toplayabilir. Toplanan bilgi türleri, kullanıcının rolüne (yolcu/sürücü) ve kullanım tercihlerine göre değişebilir.
+
+2.1 Yolcu Uygulaması üzerinden
+
+Kimlik ve iletişim: telefon numarası, ad-soyad, (varsa) profil fotoğrafı, (varsa) e-posta
+
+Konum bilgileri: anlık konum, biniş/varış noktaları, rota/konum güncellemeleri (işin gerektirdiği ölçüde)
+
+Kullanım ve işlem kayıtları: talep oluşturma zamanı, eşleşme ve durum kayıtları, iptal/başlat/bitir akışları, puanlama ve yorumlar (varsa)
+
+Destek kayıtları: destek talepleri, şikâyet/geri bildirim içerikleri, iletişim kayıtları
+
+2.2 Sürücü Uygulaması üzerinden
+
+Kimlik ve iletişim: telefon numarası, ad-soyad, (varsa) profil bilgileri
+
+Araç ve sürücü bilgileri: plaka, araç marka-model, hizmet bölgesi gibi operasyonel bilgiler
+
+Konum ve durum: uygulama açıkken/çevrimiçi modda anlık konum, online/offline durumu, çağrı kabul/ret ve yolculuk durum kayıtları
+
+Performans bilgileri: puan, kabul/iptal oranı, geçmiş işler
+
+2.3 Teknik/cihaz verileri
+
+Cihaz ve uygulama verileri: cihaz türü, işletim sistemi sürümü, uygulama sürümü, hata kayıtları, performans ölçümleri (sınırlı)
+
+Güvenlik logları: suistimal önleme, anomali tespiti ve güvenlik amaçlı kayıtlar
+
+Bildirim verileri: push bildirimlerinin iletimi/teslim bilgileri
+
+Önemli Not: Taksibu, kural olarak özel nitelikli kişisel veri (sağlık vb.) işlemeyi amaçlamaz. Kullanıcıların destek talebi sırasında kendiliğinden bu tür veri paylaşması halinde, yalnızca ilgili talebi yönetmek için ve hukuka uygun biçimde sınırlı olarak işlenebilir.
+
+3) Bilgileri Kullanma Amaçlarımız
+
+Taksibu, topladığı bilgileri genel olarak şu amaçlarla kullanır:
+
+Hizmeti sunmak ve işletmek: kayıt/oturum yönetimi, yolcu talebinin alınması, sürücü ile eşleştirme
+
+Güvenlik ve doğrulama: OTP ile giriş, tek plaka–tek oturum güvenliği, 4 haneli doğrulama ile yolculuğu başlatma kontrolü
+
+Konum tabanlı işleyiş: sürücüye/yolcuya konum doğrulama, sürücünün yaklaşmasıyla “geldi” bildirimleri, canlı takip
+
+Destek ve iletişim: talep/şikâyet yönetimi, kullanıcı ile iletişim kurulması
+
+İyileştirme ve geliştirme: performans ölçümü, hata giderme, ürün/operasyon geliştirme
+
+Güvenlik ve suistimal önleme: rate limiting, bot/saldırı önleme, anormal kullanım tespiti, log analizi
+
+Hukuki süreçler ve yükümlülükler: yasal taleplere yanıt, zorunlu saklama/raporlama halleri
+
+4) Ödeme, Fiş/Fatura ve Mali Hususlar
+4.1 Mevcut ödeme düzeni (v1.0)
+
+Taksibu’da uygulama içi ödeme ve kredi kartı tahsilatı bulunmamaktadır.
+
+Yolculuk ücreti, yolculuk sonunda yolcu tarafından sürücüye doğrudan ödenir (nakit veya sürücünün kendi POS cihazı gibi yöntemlerle).
+
+Taksibu, mevcut durumda yolculuk başına komisyon tahsil etmez ve ödeme sürecinin tarafı değildir.
+
+4.2 Fiş/Fatura/Belge düzeni (çok önemli)
+
+Yolculuğa ilişkin fiş/fatura/ödeme belgesi, yolcunun bindiği taksi/sürücü tarafından düzenlenir.
+
+Taksibu, yolcu yolculuğuna ilişkin fiş kesmez ve fatura düzenlemez.
+
+İleride sürücülerden aidat/abonelik/hizmet bedeli alınması halinde, bu bedellere ilişkin belgelendirme/faturalandırma (mevzuata uygun şekilde) Taksibu tarafından sürücüye yapılabilir. Bu durum, yolcuya kesilecek fiş/faturanın yerine geçmez ve onunla karıştırılmamalıdır.
+
+4.3 İleride değişebilecek iş modeli (bilgilendirme)
+
+Taksibu ileride;
+
+sürücülerden aidat/abonelik,
+
+yolculuklardan yüzdelik komisyon,
+
+uygulama içi ödeme/tahsilat
+gibi modellere geçebilir.
+
+Bu gibi değişikliklerde; kullanım koşulları, sözleşmeler, aydınlatma metinleri ve gerekiyorsa rıza mekanizmaları güncellenir ve kullanıcılara duyurulur.
+
+5) Bilgilerin Üçüncü Kişilerle Paylaşılması
+
+Taksibu, bilgileri yalnızca hizmetin kurulması ve çalışması için gerekli olduğu ölçüde ve hukuka uygun şekilde üçüncü kişilerle paylaşabilir. Örnek alıcı grupları:
+
+Harita/konum ve adres arama hizmetleri (ör. harita, navigasyon, yer arama altyapıları)
+
+Bildirim servisleri (push bildirim altyapıları)
+
+Sunucu, bulut, barındırma ve veritabanı hizmetleri
+
+Müşteri destek altyapıları (varsa)
+
+Hukuken yetkili kurum/kuruluşlar (yasal talep halinde)
+
+Taksibu, kullanıcı verilerini hizmetin sunulması dışında amaçlarla üçüncü taraflara satmaz; paylaşım yapılması gereken hallerde minimizasyon (en az veri) yaklaşımı gözetilir.
+
+6) Bilgilerin Saklanması ve Korunması
+
+Bilgiler, işleme amacının gerektirdiği süre boyunca ve/veya mevzuatta öngörülen sürelerde saklanır.
+
+Süre bitiminde veriler; silme, yok etme veya anonimleştirme yöntemleriyle imha edilir.
+
+Konum verisi yaklaşımı (özet):
+
+Yolculuk güvenliği ve akış yönetimi için konum verileri yolculuk sürecinde işlenir.
+
+Yolculuk sonrasında, güvenlik/istatistik ihtiyaçlarıyla sınırlı şekilde saklama veya anonimleştirme/minimizasyon uygulanabilir.
+
+7) Bilgi Güvenliği
+
+Taksibu, bilgi güvenliği risklerini azaltmak için teknik ve idari önlemler uygular. Örnekler:
+
+Şifreli iletişim (SSL/TLS)
+
+Yetkilendirme ve rol bazlı erişim kontrolü
+
+Loglama, izleme, anomali tespiti
+
+Rate limiting, bot/saldırı önleme
+
+Düzenli yedekleme
+
+Gerekli durumlarda maskeleme/şifreleme
+
+8) Kullanıcıların Sorumlulukları
+
+Kullanıcılar;
+
+uygulamaya sağladıkları bilgilerin doğru ve güncel olmasından,
+
+cihaz/hesap güvenliğinin (OTP kodu, cihaz erişimi vb.) korunmasından,
+
+üçüncü kişilere ait bilgileri paylaşmaları halinde paylaşım yetkisine sahip olmaktan
+sorumludur.
+
+Bazı verilerin sağlanmaması veya izinlerin kapatılması (ör. konum izni), uygulamanın bazı işlevlerinin kısmen veya tamamen çalışmamasına neden olabilir.
+
+9) Üçüncü Taraf Bağlantılar
+
+Uygulama içinde üçüncü taraf uygulamalara/servislere (ör. harita/navigasyon) yönlendirmeler olabilir. Bu hizmetlerin kendi gizlilik politikaları geçerlidir. Taksibu, üçüncü tarafların politika ve uygulamalarından sorumlu değildir.
+
+10) Sorumluluk Sınırları (Uygulama Kullanımı ve Operasyon)
+
+Taksibu, bir taşıma hizmeti sağlayıcısı olmadığından ve yolculuğun tarafı olmadığından aşağıdaki durumlarda doğrudan sorumluluk kabul etmez:
+
+Sürücünün çağrıyı iptal etmesi, yolcunun gecikmesi, zamanında gelememe
+
+Sürücünün yolcuya ulaşamaması veya tarafların birbirini bulamaması (yanlış konum/pin, iletişim kopukluğu vb.)
+
+GPS sapmaları, internet kesintileri, harita/altyapı kaynaklı hatalar
+
+Araç arızası, yolda kalma, çekilme/bağlanma, trafik kazası/cezası, güzergâh uyuşmazlığı
+
+Araç içinde yaşanan tartışma, kavga, hakaret, tehdit, taciz, şiddet gibi davranışsal olaylar
+
+Araçta unutulan eşyalar (kayıp/hasar dahil)
+
+Ücret/para üstü/POS arızası/fiş-fatura verilmemesi gibi ödeme-belge uyuşmazlıkları
+
+Taksibu bu gibi olaylarda, yalnızca platform güvenliği ve kötüye kullanımın önlenmesi kapsamında sistemsel aksiyonlar (kayıt inceleme, hesap kısıtlama vb.) alabilir ve yasal mercilerden gelen taleplere mevzuat çerçevesinde yanıt verebilir.
+
+11) Değişiklikler
+
+Taksibu; uygulamayı, özellikleri ve bu Politikayı zaman zaman güncelleyebilir. Güncel metin uygulama içinde ve/veya web kanallarında yayımlandığı tarihten itibaren geçerli olur.
+
+12) İletişim
+
+Gizlilik ve kişisel verilerle ilgili talepleriniz için, Taksibu’nun resmi iletişim kanallarından bize ulaşabilirsiniz. (Şirket e-posta/adres bilgilerinizi verdiğinde bu bölümü “tam doldurulmuş” hale getirip tek parça nihai metne çevirebilirim.)

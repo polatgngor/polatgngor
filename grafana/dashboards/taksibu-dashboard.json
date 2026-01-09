@@ -1,0 +1,68 @@
+{
+  "id": null,
+  "title": "Taksibu - System Health",
+  "tags": ["taksibu", "health"],
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Redis Up",
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "taksibu_redis_up", "legendFormat": "", "refId": "A" }]
+    },
+    {
+      "type": "stat",
+      "title": "DB Up",
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+      "targets": [{ "expr": "taksibu_db_up", "refId": "A" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Queue Delayed (ride-timeout-queue)",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 6 },
+      "targets": [{ "expr": "taksibu_queue_delayed{queue=\"ride-timeout-queue\"}", "refId": "A" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Queue Waiting (ride-timeout-queue)",
+      "gridPos": { "x": 0, "y": 10, "w": 12, "h": 6 },
+      "targets": [{ "expr": "taksibu_queue_waiting{queue=\"ride-timeout-queue\"}", "refId": "A" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Bull Job Failures (rate 5m)",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 6 },
+      "targets": [{ "expr": "increase(taksibu_bull_job_failures_total{queue=\"ride-timeout-queue\"}[5m])", "refId": "A" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "HTTP 5xx Rate (5m)",
+      "gridPos": { "x": 12, "y": 10, "w": 12, "h": 6 },
+      "targets": [
+        {
+          "expr": "(sum(rate(taksibu_http_requests_total{status_code=~\"5..\"}[5m])) / sum(rate(taksibu_http_requests_total[5m])))",
+          "refId": "A",
+          "legendFormat": "5xx rate"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "HTTP Request Duration (p95)",
+      "gridPos": { "x": 0, "y": 16, "w": 12, "h": 6 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(taksibu_http_request_duration_seconds_bucket[5m])) by (le))",
+          "refId": "A",
+          "legendFormat": "p95"
+        }
+      ]
+    }
+  ],
+  "templating": { "list": [] },
+  "annotations": { "list": [] },
+  "time": { "from": "now-15m", "to": "now" }
+}

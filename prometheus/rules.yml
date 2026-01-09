@@ -1,0 +1,47 @@
+groups:
+  - name: taksibu-alerts
+    rules:
+      - alert: TaksibuDBDown
+        expr: taksibu_db_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database unreachable"
+          description: "taksibu_db_up == 0 for more than 1 minute."
+
+      - alert: TaksibuRedisDown
+        expr: taksibu_redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis unreachable"
+          description: "taksibu_redis_up == 0 for more than 1 minute."
+
+      - alert: BullJobFailures
+        expr: increase(taksibu_bull_job_failures_total{queue="ride-timeout-queue"}[5m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Bull job failures detected"
+          description: "taksibu_bull_job_failures_total increased in the last 5m."
+
+      - alert: QueueDelayedHigh
+        expr: taksibu_queue_delayed{queue="ride-timeout-queue"} > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Many delayed jobs in ride-timeout-queue"
+          description: "There are more than 10 delayed jobs for 5m."
+
+      - alert: HttpErrorRateHigh
+        expr: (sum(rate(taksibu_http_requests_total{status_code=~"5.."}[5m])) / sum(rate(taksibu_http_requests_total[5m]))) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High 5xx error rate"
+          description: "More than 5% of requests are 5xx in last 5m."
