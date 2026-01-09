@@ -1,10 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart'; // Needed for Colors/SnackBar
 import 'package:flutter/foundation.dart';
 import '../../features/auth/data/auth_repository.dart';
-import '../../core/utils/globals.dart'; // Correct import
 
 final notificationServiceProvider = Provider((ref) => NotificationService(ref));
 
@@ -61,32 +59,6 @@ class NotificationService {
       // Get Tokens
       String? token = await _firebaseMessaging.getToken();
       
-      if (defaultTargetPlatform == TargetPlatform.iOS) {
-        String? apnsToken = await _firebaseMessaging.getAPNSToken();
-        debugPrint('APNS Token: $apnsToken');
-        
-        // VISUAL FEEDBACK FOR TESTFLIGHT
-        if (apnsToken == null) {
-           debugPrint('CRITICAL: APNS Token is null.');
-           rootScaffoldMessengerKey.currentState?.showSnackBar(
-             const SnackBar(
-               content: Text("HATA: APNS Token alınamadı! (iOS Bildirim Ayarlarını Kontrol Edin)"),
-               backgroundColor: Colors.red,
-               duration: Duration(seconds: 10),
-             )
-           );
-        } else {
-            // Optional: Show success briefly
-           rootScaffoldMessengerKey.currentState?.showSnackBar(
-             SnackBar(
-               content: Text("APNS OK: ${apnsToken.substring(0, 5)}..."),
-               backgroundColor: Colors.green,
-               duration: const Duration(seconds: 3),
-             )
-           );
-        }
-      }
-
       if (token != null) {
         debugPrint('FCM Token: $token');
         // Send to backend

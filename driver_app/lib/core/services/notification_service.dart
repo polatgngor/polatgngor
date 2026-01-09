@@ -53,7 +53,20 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 class NotificationService {
   Future<void> initialize() async {
      await Firebase.initializeApp();
+     
+     // Request Permissions
+     NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+     
+     // Listen for foreground
+     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        debugPrint("Foreground message: ${message.data}");
+     });
   }
 }
 
