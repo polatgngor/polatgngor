@@ -61,6 +61,13 @@ class NotificationService {
       sound: true,
     );
 
+    // Explicitly enable foreground notifications for iOS
+    await _firebaseMessaging.setForegroundNotificationPresentationOptions(
+      alert: true, 
+      badge: true, 
+      sound: true,
+    );
+
      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
      
      // Listen for foreground
