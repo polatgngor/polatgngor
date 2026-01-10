@@ -131,38 +131,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
   }
 
   Future<void> _initialize() async {
-    await _initSocket();
-    if (mounted) {
-      // Initialize Notifications
-      ref.read(notificationServiceProvider).initialize();
-      // Sync ride state on startup
-      await _syncRideState();
+    try {
+      await _initSocket();
+      if (mounted) {
+        // Initialize Notifications
+        ref.read(notificationServiceProvider).initialize();
+        // Sync ride state on startup
+        await _syncRideState();
 
-      // Adjust sheet size after sync
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-         if (_sheetController.isAttached) {
-             final status = ref.read(rideProvider).status;
-             
-             // Same adaptive logic as ref.listen
-             final double screenHeight = MediaQuery.of(context).size.height;
-             final double safeArea = MediaQuery.of(context).viewPadding.bottom;
-             double pixelHeight = 350.0;
+        // Adjust sheet size after sync
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+           if (_sheetController.isAttached) {
+               final status = ref.read(rideProvider).status;
+               
+               // Same adaptive logic as ref.listen
+               final double screenHeight = MediaQuery.of(context).size.height;
+               final double safeArea = MediaQuery.of(context).viewPadding.bottom;
+               double pixelHeight = 350.0;
 
-             // REF: User Requests & Buffer for Fixed Content
-             // Searching/Found -> 220 + Buffer = 240
-             if (status == RideStatus.searching) pixelHeight = 240.0;
-             else if (status == RideStatus.driverFound) pixelHeight = 370.0; 
-             else if (status == RideStatus.rideStarted) pixelHeight = 230.0; 
-             else if (status == RideStatus.driverFoundTransition) pixelHeight = 240.0;
-             else if (status == RideStatus.noDriverFound) pixelHeight = 320.0;
-             else pixelHeight = 410.0; // Reduced from 460 (Removed bottom padding)
+               // REF: User Requests & Buffer for Fixed Content
+               // Searching/Found -> 220 + Buffer = 240
+               if (status == RideStatus.searching) pixelHeight = 240.0;
+               else if (status == RideStatus.driverFound) pixelHeight = 370.0; 
+               else if (status == RideStatus.rideStarted) pixelHeight = 230.0; 
+               else if (status == RideStatus.driverFoundTransition) pixelHeight = 240.0;
+               else if (status == RideStatus.noDriverFound) pixelHeight = 320.0;
+               else pixelHeight = 410.0; // Reduced from 460 (Removed bottom padding)
 
-             // Strict clamp to ensure it fits but doesn't overflow
-             double targetHeight = ((pixelHeight + safeArea) / screenHeight).clamp(0.12, 0.95);
+               // Strict clamp to ensure it fits but doesn't overflow
+               double targetHeight = ((pixelHeight + safeArea) / screenHeight).clamp(0.12, 0.95);
 
-             _sheetController.jumpTo(targetHeight);
-         }
-      });
+               _sheetController.jumpTo(targetHeight);
+           }
+        });
+      }
+    } catch (e) {
+      debugPrint("Home Initialization Error: $e");
+    } finally {
+      if (mounted) {
+        FlutterNativeSplash.remove(); // Safety net
+      }
     }
   }
 

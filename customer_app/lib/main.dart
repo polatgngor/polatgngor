@@ -18,13 +18,16 @@ import 'firebase_options.dart';
 void main() async {
   runZonedGuarded(() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding); // DEBUG: Commented out to see errors
     
     try {
       if (Platform.isIOS) {
         await Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform,
-        );
+        ).timeout(const Duration(seconds: 10), onTimeout: () {
+            debugPrint("Firebase init timed out on iOS");
+            return Firebase.app(); // Return default or throw
+        });
       } else {
         await Firebase.initializeApp();
       }
