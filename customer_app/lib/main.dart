@@ -13,7 +13,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import '../../features/auth/presentation/auth_provider.dart';
-import 'firebase_options_manual.dart';
+import 'firebase_options.dart';
 
 void main() async {
   runZonedGuarded(() async {
@@ -21,9 +21,13 @@ void main() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     
     try {
-      // Use standard initialization for both platforms (reads from plist on iOS)
-      await Firebase.initializeApp();
-
+      if (Platform.isIOS) {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      } else {
+        await Firebase.initializeApp();
+      }
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
       await EasyLocalization.ensureInitialized();
