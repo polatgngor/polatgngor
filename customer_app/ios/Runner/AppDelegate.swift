@@ -12,6 +12,12 @@ import FirebaseMessaging
   ) -> Bool {
     GMSServices.provideAPIKey("AIzaSyBiFIf0b9O4EM7khvcK6Z6I25vfmwzv3Vw")
     GeneratedPluginRegistrant.register(with: self)
+    
+    if #available(iOS 10.0, *) {
+        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+    }
+    application.registerForRemoteNotifications()
+    
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
