@@ -30,7 +30,8 @@ router.get('/', authMiddleware, profileController.getProfile);
 router.put('/', authMiddleware, profileController.updateProfile);
 router.post('/change-phone', authMiddleware, profileController.changePhone);
 router.post('/password', authMiddleware, profileController.changePassword);
-router.post('/logout', authMiddleware, profileController.logout);
+// Make logout public so users with expired tokens can still clean up their client state
+router.post('/logout', profileController.logout);
 router.post('/delete', authMiddleware, profileController.deleteAccount);
 router.post('/device', authMiddleware, profileController.registerDevice);
 router.post('/upload-photo', authMiddleware, upload.single('photo'), profileController.uploadPhoto);
