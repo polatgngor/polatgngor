@@ -21,13 +21,9 @@ void main() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     
     try {
-      if (Platform.isIOS) {
-        await Firebase.initializeApp(
-          options: ManualFirebaseOptions.currentPlatform,
-        );
-      } else {
-        await Firebase.initializeApp();
-      }
+      // Use standard initialization for both platforms (reads from plist on iOS)
+      await Firebase.initializeApp();
+
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
       await EasyLocalization.ensureInitialized();
