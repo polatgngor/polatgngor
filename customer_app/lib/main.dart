@@ -18,7 +18,7 @@ import 'firebase_options.dart';
 void main() async {
   runZonedGuarded(() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding); // DEBUG: Commented out to see errors
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     
     try {
       if (Platform.isIOS) {
