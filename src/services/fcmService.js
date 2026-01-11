@@ -125,13 +125,11 @@ class FCMService {
         }
 
         // 2. Retry with Secondary if Mismatch
+        // Retry with Secondary if Primary failed (for ANY reason, including Auth errors like invalid_grant)
         if (!result.success && this.secondaryApp) {
-            // Check error code usually: error.code === 'messaging/mismatched-credential'
-            // But we can just retry on any failure safely as a fallback
-            if (result.error && (result.error.code === 'messaging/mismatched-credential' || result.error.code === 'messaging/invalid-argument')) {
-                console.log(`[fcm] Primary failed (${result.error.code}). Retrying with Secondary app...`);
-                result = await trySend(this.secondaryApp);
-            }
+            const errorCode = result.error ? result.error.code || result.error.message : 'unknown';
+            console.log(`[fcm] Primary failed (${errorCode}). Retrying with Secondary app...`);
+            result = await trySend(this.secondaryApp);
         }
 
         if (result.success) {

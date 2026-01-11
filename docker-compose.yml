@@ -33,6 +33,7 @@ services:
     volumes:
       - ./uploads:/usr/src/app/uploads
       - ./firebase-service-account.json:/usr/src/app/firebase-service-account.json
+      - ./firebase-service-account2.json:/usr/src/app/firebase-service-account2.json
     depends_on:
       - mysql
       - redis
