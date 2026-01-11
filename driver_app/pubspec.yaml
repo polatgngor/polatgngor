@@ -43,9 +43,8 @@ dependencies:
   flutter_background_service: ^5.0.0
   flutter_local_notifications: ^18.0.0
   easy_localization: ^3.0.7
-  firebase_core: ^4.3.0
-  firebase_crashlytics: ^5.0.0
-  firebase_messaging: ^16.1.0
+  firebase_core: ^2.27.0
+  firebase_messaging: ^14.7.10
   fl_chart: ^0.68.0
   # Audio
   audioplayers: ^6.0.0

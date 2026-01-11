@@ -9,105 +9,54 @@ import 'features/auth/presentation/auth_provider.dart';
 import 'core/services/background_service.dart';
 import 'core/services/notification_service.dart';
 import 'core/services/ringtone_service.dart';
-import 'dart:async';
-import 'dart:io';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
-  runZonedGuarded(() async {
-    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-    
-    try {
-      if (Platform.isIOS) {
-        await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        );
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  
+  await EasyLocalization.ensureInitialized();
+  
+  // Fire and forget - don't block app startup
+  NotificationService().initialize();
+  BackgroundService.initializeService();
+  
+  // CHECK FOR PENDING CALL SOUND
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final bool? pendingSound = prefs.getBool('pending_call_sound');
+    final String? timestampStr = prefs.getString('pending_call_timestamp');
+
+    if (pendingSound == true && timestampStr != null) {
+      final DateTime timestamp = DateTime.parse(timestampStr);
+      final DateTime now = DateTime.now();
+      // Only play if the trigger was recent (e.g., within last 30 seconds)
+      if (now.difference(timestamp).inSeconds < 30) {
+        debugPrint("Main: Pending call sound detected within valid time window. Playing Ringtone.");
+        // Play Ringtone Immediately
+        await RingtoneService().playRingtone();
+        
+        // Clear flag
+        await prefs.remove('pending_call_sound');
+        await prefs.remove('pending_call_timestamp');
       } else {
-        await Firebase.initializeApp();
+         debugPrint("Main: Pending call sound detected but expired. Clearing.");
+         await prefs.remove('pending_call_sound');
+         await prefs.remove('pending_call_timestamp');
       }
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
-      await EasyLocalization.ensureInitialized();
-      
-      // Fire and forget - don't block app startup
-      NotificationService().initialize();
-      BackgroundService.initializeService();
-      
-      // CHECK FOR PENDING CALL SOUND
-      try {
-        final prefs = await SharedPreferences.getInstance();
-        final bool? pendingSound = prefs.getBool('pending_call_sound');
-        final String? timestampStr = prefs.getString('pending_call_timestamp');
-
-        if (pendingSound == true && timestampStr != null) {
-          final DateTime timestamp = DateTime.parse(timestampStr);
-          final DateTime now = DateTime.now();
-          if (now.difference(timestamp).inSeconds < 30) {
-            debugPrint("Main: Pending call sound detected within valid time window. Playing Ringtone.");
-            await RingtoneService().playRingtone();
-            await prefs.remove('pending_call_sound');
-            await prefs.remove('pending_call_timestamp');
-          } else {
-             debugPrint("Main: Pending call sound detected but expired. Clearing.");
-             await prefs.remove('pending_call_sound');
-             await prefs.remove('pending_call_timestamp');
-          }
-        }
-      } catch (e) {
-        debugPrint("Main: Error checking pending sound: $e");
-      }
-
-      runApp(
-        EasyLocalization(
-          supportedLocales: const [Locale('tr'), Locale('en')],
-          path: 'assets/translations',
-          fallbackLocale: const Locale('tr'),
-          startLocale: const Locale('tr'),
-          child: const ProviderScope(child: DriverApp()),
-        ),
-      );
-    } catch (e, s) {
-      debugPrint("Startup Error: $e");
-      FlutterNativeSplash.remove();
-      runApp(ErrorApp(message: "Başlatma Hatası: $e"));
     }
-  }, (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  });
-}
-
-class ErrorApp extends StatelessWidget {
-  final String message;
-  const ErrorApp({super.key, required this.message});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error_outline, color: Colors.red, size: 60),
-                  const SizedBox(height: 20),
-                  const Text("Uygulama Başlatılamadı", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 10),
-                  SelectableText(message, textAlign: TextAlign.center, style: const TextStyle(color: Colors.red)),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+  } catch (e) {
+    debugPrint("Main: Error checking pending sound: $e");
   }
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('tr'), Locale('en')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('tr'),
+      startLocale: const Locale('tr'),
+      child: const ProviderScope(child: DriverApp()),
+    ),
+  );
 }
 
 class DriverApp extends ConsumerWidget {

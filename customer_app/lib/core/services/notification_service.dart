@@ -25,13 +25,6 @@ class NotificationService {
       badge: true,
       sound: true,
     );
-    
-    // Explicitly enable foreground notifications for iOS
-    await _firebaseMessaging.setForegroundNotificationPresentationOptions(
-      alert: true, 
-      badge: true, 
-      sound: true,
-    );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       debugPrint('User granted permission');
@@ -63,9 +56,8 @@ class NotificationService {
         ));
       }
 
-      // Get Tokens
+      // Get Token
       String? token = await _firebaseMessaging.getToken();
-      
       if (token != null) {
         debugPrint('FCM Token: $token');
         // Send to backend

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import '../../../../core/widgets/custom_toast.dart';
-import 'dart:io';
 import '../../../auth/data/auth_service.dart';
 import '../../../auth/presentation/auth_provider.dart';
 import '../../../auth/presentation/auth_provider.dart';
@@ -240,12 +237,6 @@ class _DriverDrawerState extends ConsumerState<DriverDrawer> with SingleTickerPr
                     context.push('/support');
                   },
                 ),
-                _buildDrawerItem(
-                  context,
-                  icon: Icons.bug_report_outlined,
-                  title: 'Debug Bilgisi',
-                  onTap: _showDebugInfo,
-                ),
                 Theme(
                   data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                   child: ExpansionTile(
@@ -410,79 +401,6 @@ class _DriverDrawerState extends ConsumerState<DriverDrawer> with SingleTickerPr
       ),
      ),
     );
-  }
-
-  Future<void> _showDebugInfo() async {
-    // Loading feedback
-    if (context.mounted) {
-       CustomNotificationService.show(context, 'Tokenlar alınıyor...', ToastType.info);
-    }
-
-    try {
-      // 1. Request Permission explicitly
-      final settings = await FirebaseMessaging.instance.requestPermission(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-      
-      // 2. Get APNs (iOS specific) - WAIT for it
-      String? apnsToken;
-      if (Platform.isIOS) {
-        // Retry a few times for APNs
-        for (int i = 0; i < 3; i++) {
-          apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-          if (apnsToken != null) break;
-          await Future.delayed(const Duration(seconds: 1));
-        }
-      } else {
-        apnsToken = 'Android (Not applicable)';
-      }
-
-      // 3. Get FCM
-      final fcmToken = await FirebaseMessaging.instance.getToken();
-      
-      if (!context.mounted) return;
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Debug Test Bilgileri'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('İzin Durumu:', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(settings.authorizationStatus.toString()),
-                const SizedBox(height: 12),
-                
-                const Text('APNs Token (Apple):', style: TextStyle(fontWeight: FontWeight.bold)),
-                SelectableText(apnsToken ?? 'YOK (HATA: Bildirim İzni veya Push Capability Eksik)'),
-                const SizedBox(height: 12),
-
-                const Text('FCM Token (Firebase):', style: TextStyle(fontWeight: FontWeight.bold)),
-                SelectableText(fcmToken ?? 'YOK (APNs bekleniyor olabilir)'),
-                const SizedBox(height: 12),
-                
-                const Text('Talimat:', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                const Text('FCM Token\'ı kopyalayıp Firebase Console -> Messaging -> Send Test Message kısmına yapıştırın.', style: TextStyle(fontSize: 12)),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Kapat'),
-            ),
-          ],
-        ),
-      );
-    } catch (e) {
-      if (context.mounted) {
-        CustomNotificationService.show(context, 'Hata: $e', ToastType.error);
-      }
-    }
   }
 
   Widget _buildDrawerItem(

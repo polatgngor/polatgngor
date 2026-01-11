@@ -208,12 +208,8 @@ async function emitRideRequest(ride, opts = {}) {
           // Send Push (using pre-fetched tokens)
           const tokens = deviceMap.get(String(driverId));
           if (tokens && tokens.length > 0) {
-            // Fire visible notification for iOS/Android background wake-up
-            sendPushToTokens(
-              tokens, 
-              { title: 'Yeni Yolcu İsteği', body: 'Yakınınızda bir yolcu var, hemen kabul et!' }, 
-              { type: 'request_incoming', ride_id: String(ride.id), vehicle_type: vehicle_type }
-            ).catch(() => { });
+            // Fire and forget push - SILENT (Null notification) for "Zınk" without Banner
+            sendPushToTokens(tokens, null, { type: 'request_incoming', ride_id: String(ride.id), vehicle_type: vehicle_type }).catch(() => { });
           }
         } catch (err) {
           console.warn('[matchService] emit failed', driverId, err);

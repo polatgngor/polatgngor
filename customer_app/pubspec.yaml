@@ -30,9 +30,8 @@ dependencies:
 
 
   # Firebase
-  firebase_core: ^4.3.0
-  firebase_crashlytics: ^5.0.0
-  firebase_messaging: ^16.1.0
+  firebase_core: ^2.27.0
+  firebase_messaging: ^14.7.10
   flutter_local_notifications: ^18.0.0
   easy_localization: ^3.0.7
   
@@ -70,7 +69,6 @@ flutter_native_splash:
   android_12:
     image: assets/images/splash_logo_padded.png
     icon_background_color: "#FFFFFF"
-    fullscreen: true
 
 flutter:
   uses-material-design: true

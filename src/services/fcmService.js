@@ -2,144 +2,92 @@ const admin = require('firebase-admin');
 const path = require('path');
 const fs = require('fs');
 
-class FCMService {
-    constructor() {
-        this.initialized = false;
-        this.secondaryApp = null;
-        this.init();
+let isInitialized = false;
+
+try {
+    const serviceAccountPath = path.join(__dirname, '../../firebase-service-account.json');
+
+    if (fs.existsSync(serviceAccountPath)) {
+        const serviceAccount = require(serviceAccountPath);
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount)
+        });
+        isInitialized = true;
+        console.log('FCM Initialized successfully');
+    } else {
+        console.warn('Warning: serviceAccountKey.json not found. FCM will not work.');
+    }
+} catch (error) {
+    console.error('Error initializing FCM:', error);
+}
+
+/**
+ * Send a notification to a specific device token
+ * @param {string} token - FCM Device Token
+ * @param {string} title - Notification Title
+ * @param {string} body - Notification Body
+ * @param {object} data - Custom data payload (optional)
+ */
+async function sendNotification(token, title, body, data = {}) {
+    if (!isInitialized) {
+        console.warn('FCM not initialized, skipping notification:', title);
+        return false;
     }
 
-    init() {
-        try {
-            // 1. Initialize Primary App (firebase-service-account.json) - Default
-            const serviceAccountPath = path.join(__dirname, '../../firebase-service-account.json');
-
-            if (fs.existsSync(serviceAccountPath)) {
-                if (!admin.apps.length) {
-                    const serviceAccount = require(serviceAccountPath);
-                    admin.initializeApp({
-                        credential: admin.credential.cert(serviceAccount)
-                    });
-                    console.log('[fcm] Primary Firebase admin initialized');
-                }
-                this.initialized = true;
-            } else {
-                console.warn('[fcm] Warning: firebase-service-account.json not found.');
-            }
-
-            // 2. Initialize Secondary App (firebase-service-account2.json) - Legacy
-            try {
-                const serviceAccount2Path = path.join(__dirname, '../../firebase-service-account2.json');
-                if (fs.existsSync(serviceAccount2Path)) {
-                    const serviceAccount2 = require(serviceAccount2Path);
-                    // Check if already initialized to avoid error
-                    const existingApp = admin.apps.find(app => app.name === 'secondary');
-                    if (!existingApp) {
-                        this.secondaryApp = admin.initializeApp({
-                            credential: admin.credential.cert(serviceAccount2)
-                        }, 'secondary');
-                        console.log('[fcm] Secondary Firebase admin initialized (Legacy)');
-                    } else {
-                        this.secondaryApp = existingApp;
-                    }
-                } else {
-                    console.warn('[fcm] Warning: firebase-service-account2.json not found. Legacy Android support disabled.');
-                }
-            } catch (e2) {
-                console.warn('[fcm] Setup secondary app failed:', e2.message);
-            }
-
-        } catch (error) {
-            console.error('[fcm] Error initializing FCM:', error);
-        }
+    if (!token) {
+        console.warn('No token provided for notification');
+        return false;
     }
 
-    /**
-     * Send a notification to a specific device token
-     */
-    async sendNotification(token, title, body, data = {}) {
-        if (!this.initialized && !this.secondaryApp) {
-            console.warn('[fcm] FCM not initialized, skipping notification:', title);
-            return false;
-        }
-
-        if (!token) {
-            console.warn('[fcm] No token provided for notification');
-            return false;
-        }
-
-        const message = {
-            android: {
-                priority: 'high',
-                ttl: 0,
-                notification: {
-                    channelId: 'incoming_request_channel',
-                    priority: 'max',
-                    defaultSound: true,
-                    visibility: 'public',
-                },
-                data: {
-                    ...data,
-                    click_action: 'FLUTTER_NOTIFICATION_CLICK',
-                    type: 'request_incoming',
-                }
-            },
-            apns: {
-                headers: {
-                    'apns-priority': '10',
-                    'apns-push-type': 'alert',
-                },
-                payload: {
-                    aps: {
-                        contentAvailable: true,
-                        sound: 'default',
-                    }
-                }
-            },
+    const message = {
+        // Platform specific overrides for High Priority
+        android: {
+            priority: 'high',
+            ttl: 0, // 0 = Immediate delivery
             notification: {
-                title,
-                body,
+                channelId: 'incoming_request_channel',
+                priority: 'max',
+                defaultSound: true,
+                visibility: 'public',
             },
             data: {
-                ...data, // Flatten data for iOS/general
+                ...data,
                 click_action: 'FLUTTER_NOTIFICATION_CLICK',
-                type: 'request_incoming',
-            },
-            token: token,
-        };
-
-        // Helper to send using a specific app
-        const trySend = async (appInstance) => {
-            try {
-                const response = await appInstance.messaging().send(message);
-                return { success: true, response };
-            } catch (error) {
-                return { success: false, error };
+                type: 'request_incoming', // Ensure this is set for the handler
             }
-        };
+        },
+        apns: {
+            headers: {
+                'apns-priority': '10', // 10 = Immediate
+                'apns-push-type': 'alert',
+            },
+            payload: {
+                aps: {
+                    contentAvailable: true, // critical for background fetch
+                    sound: 'default',
+                }
+            }
+        },
+        notification: {
+            title,
+            body,
+        },
+        data: {
+            ...data,
+            click_action: 'FLUTTER_NOTIFICATION_CLICK',
+            type: 'request_incoming',
+        },
+        token,
+    };
 
-        // 1. Try Primary
-        let result = { success: false };
-        if (admin.apps.length > 0) {
-            result = await trySend(admin);
-        }
-
-        // 2. Retry with Secondary if Mismatch
-        // Retry with Secondary if Primary failed (for ANY reason, including Auth errors like invalid_grant)
-        if (!result.success && this.secondaryApp) {
-            const errorCode = result.error ? result.error.code || result.error.message : 'unknown';
-            console.log(`[fcm] Primary failed (${errorCode}). Retrying with Secondary app...`);
-            result = await trySend(this.secondaryApp);
-        }
-
-        if (result.success) {
-            console.log('[fcm] Successfully sent message:', result.response);
-            return true;
-        } else {
-            console.error('[fcm] Error sending message (Both apps failed):', result.error);
-            return false;
-        }
+    try {
+        const response = await admin.messaging().send(message);
+        console.log('Successfully sent message:', response);
+        return true;
+    } catch (error) {
+        console.error('Error sending message:', error);
+        return false;
     }
 }
 
-module.exports = new FCMService();
+module.exports = { sendNotification };

@@ -41,13 +41,6 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
-		<key>CFBundleLocalizations</key>
-		<array>
-			<string>tr</string>
-			<string>en</string>
-		</array>
-		<key>FirebaseAppDelegateProxyEnabled</key>
-		<true/>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
@@ -57,14 +50,6 @@
 			<key>NSAllowsArbitraryLoads</key>
 			<true/>
 		</dict>
-		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>sms</string>
-			<string>tel</string>
-			<string>whatsapp</string>
-			<string>googlechromes</string>
-			<string>comgooglemaps</string>
-		</array>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>Konumunuzu haritada göstermek ve taksi çağırmak için kullanıyoruz.</string>
 		<key>NSLocationAlwaysUsageDescription</key>
@@ -73,11 +58,6 @@
 		<string>Profil fotoğrafı yüklemek için galeri izni gerekiyor.</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Profil fotoğrafı çekmek için kamera izni gerekiyor.</string>
-		<key>UIBackgroundModes</key>
-		<array>
-			<string>fetch</string>
-			<string>remote-notification</string>
-		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>

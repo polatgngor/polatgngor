@@ -55,8 +55,8 @@ class _LocationPermissionScreenState extends ConsumerState<LocationPermissionScr
       if (mounted) {
         context.go('/permission-notification');
       }
-    } else if (status.isPermanentlyDenied || status.isRestricted) {
-      // Only open settings if it's truly blocked
+    } else if (status.isPermanentlyDenied) {
+      // Open settings if permanently denied
       openAppSettings();
     }
   }

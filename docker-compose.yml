@@ -8,17 +8,15 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    env_file:
-      - .env
     environment:
       - PORT=3000
       - NODE_ENV=production
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
-      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
@@ -33,7 +31,6 @@ services:
     volumes:
       - ./uploads:/usr/src/app/uploads
       - ./firebase-service-account.json:/usr/src/app/firebase-service-account.json
-      - ./firebase-service-account2.json:/usr/src/app/firebase-service-account2.json
     depends_on:
       - mysql
       - redis
@@ -44,10 +41,10 @@ services:
     container_name: taksibu-mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-root}
       - MYSQL_DATABASE=${DB_NAME:-taksibu}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_USER=${DB_USER:-root}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-root}
     volumes:
       - mysql_data:/var/lib/mysql
     # Ports commented out for security in production (Internal Network Only)
@@ -60,7 +57,7 @@ services:
     image: redis:6-alpine
     container_name: taksibu-redis
     restart: always
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass ${REDIS_PASSWORD:-redispass}
     volumes:
       - redis_data:/data
     # Ports commented out for security in production

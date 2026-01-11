@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'dart:io'; 
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../auth/presentation/auth_provider.dart';
@@ -133,80 +132,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
   }
 
-  Future<void> _showDebugInfo() async {
-    if (!mounted) return;
-    
-    // Show loading indictator
-    CustomNotificationService().show(context, 'Tokenlar alınıyor...', ToastType.info);
-
-    try {
-      // 1. Request Permission explicitly
-      final settings = await FirebaseMessaging.instance.requestPermission(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-      print('User granted permission: ${settings.authorizationStatus}');
-
-      // 2. Get APNs (iOS specific) - WAIT for it
-      String? apnsToken;
-      if (Platform.isIOS) {
-        // Retry a few times for APNs
-        for (int i = 0; i < 3; i++) {
-          apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-          if (apnsToken != null) break;
-          await Future.delayed(const Duration(seconds: 1));
-        }
-      } else {
-        apnsToken = 'Android (Not applicable)';
-      }
-
-      // 3. Get FCM
-      final fcmToken = await FirebaseMessaging.instance.getToken();
-      
-      if (!mounted) return;
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Debug Test Bilgileri'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('İzin Durumu:', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(settings.authorizationStatus.toString()),
-                const SizedBox(height: 12),
-                
-                const Text('APNs Token (Apple):', style: TextStyle(fontWeight: FontWeight.bold)),
-                SelectableText(apnsToken ?? 'YOK (HATA: Bildirim İzni veya Push Capability Eksik)'),
-                const SizedBox(height: 12),
-
-                const Text('FCM Token (Firebase):', style: TextStyle(fontWeight: FontWeight.bold)),
-                SelectableText(fcmToken ?? 'YOK (APNs bekleniyor olabilir)'),
-                const SizedBox(height: 12),
-                
-                const Text('Talimat:', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                const Text('FCM Token\'ı kopyalayıp Firebase Console -> Messaging -> Send Test Message kısmına yapıştırın.', style: TextStyle(fontSize: 12)),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Kapat'),
-            ),
-          ],
-        ),
-      );
-    } catch (e) {
-      if (mounted) {
-        CustomNotificationService().show(context, 'Hata oluştu: $e', ToastType.error);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
@@ -231,6 +156,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         padding: const EdgeInsets.all(24),
         children: [
           const SizedBox(height: 10),
+          // Profile Avatar
           // Profile Avatar
           Center(
             child: GestureDetector(
@@ -283,6 +209,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
 
           const SizedBox(height: 16),
+          // Rating Display
           // Rating Display
           Column(
             children: [
@@ -383,13 +310,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           
           const SizedBox(height: 16),
 
-          _buildActionTile(
-            context,
-            'Debug Bilgileri (FCM/APNS)',
-            Icons.bug_report_outlined,
-            Colors.blueGrey,
-            _showDebugInfo,
-          ),
+
           
           // Reduced spacing
           const SizedBox(height: 16),
